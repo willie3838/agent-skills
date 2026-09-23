@@ -1,0 +1,17 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+venv/
+.venv/
+
+# macOS / OS metadata
+.DS_Store
+Thumbs.db
+
+# Workspace / Eval iteration outputs
+*-workspace/
+/tmp/
