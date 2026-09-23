@@ -97,6 +97,23 @@ while [[ $# -gt 0 ]]; do
   esac
 done
 
+# Prerequisite checks
+check_prereqs() {
+  if ! command -v tmux &>/dev/null; then
+    echo "==========================================================" >&2
+    echo "[-] WARNING: 'tmux' is not installed." >&2
+    echo "    'tmux' is a required prerequisite for terminal multi-agent" >&2
+    echo "    workflows (e.g. subagent-driven-development)." >&2
+    echo "    Please install it using:" >&2
+    echo "      Debian/Ubuntu: sudo apt-get update && sudo apt-get install -y tmux" >&2
+    echo "      macOS:         brew install tmux" >&2
+    echo "==========================================================" >&2
+    echo "" >&2
+  fi
+}
+
+check_prereqs
+
 # If no skills specified, select all available
 if [ ${#CHOSEN_SKILLS[@]} -eq 0 ]; then
   for dir in "${SKILLS_DIR}"/*; do

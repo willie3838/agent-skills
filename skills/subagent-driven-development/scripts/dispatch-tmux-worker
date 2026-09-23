@@ -1,0 +1,58 @@
+#!/usr/bin/env bash
+# dispatch-tmux-worker: Spawns an implementer or reviewer agent in a dedicated tmux window
+# Usage:
+#   dispatch-tmux-worker <session-name> <window-name> <brief-file> <report-file> [agent-cmd]
+#
+# Prerequisite: tmux must be installed.
+
+set -euo pipefail
+
+if ! command -v tmux &>/dev/null; then
+  echo "Error: tmux is required but not installed." >&2
+  exit 1
+fi
+
+SESSION="${1:-sdd-swarm}"
+WORKER_NAME="${2:-worker}"
+BRIEF_FILE="${3:-}"
+REPORT_FILE="${4:-}"
+AGENT_CMD="${5:-jetski --dangerously-skip-permissions}"
+
+# Ensure session exists; if not, create detached session
+if ! tmux has-session -t "${SESSION}" 2>/dev/null; then
+  tmux new-session -d -s "${SESSION}" -n "controller"
+  echo "[+] Created new tmux session: ${SESSION}"
+fi
+
+DONE_SENTINEL="${REPORT_FILE}.done"
+rm -f "${DONE_SENTINEL}"
+
+RUNNER_SCRIPT="$(mktemp /tmp/sdd-worker-XXXXXX.sh)"
+chmod +x "${RUNNER_SCRIPT}"
+
+cat <<EOF > "${RUNNER_SCRIPT}"
+#!/usr/bin/env bash
+echo "=== Starting SDD Worker: ${WORKER_NAME} ==="
+echo "Brief: ${BRIEF_FILE}"
+echo "Report: ${REPORT_FILE}"
+echo "Working directory: $(pwd)"
+echo "------------------------------------------"
+
+if [ -n "${BRIEF_FILE}" ] && [ -f "${BRIEF_FILE}" ]; then
+  echo "Executing task with prompt from brief..."
+  ${AGENT_CMD} "Read task brief at ${BRIEF_FILE} and execute the task. Write completion report to ${REPORT_FILE}."
+else
+  ${AGENT_CMD}
+fi
+
+EXIT_CODE=\$?
+echo \${EXIT_CODE} > "${DONE_SENTINEL}"
+echo "=== Worker ${WORKER_NAME} finished with code \${EXIT_CODE} ==="
+sleep 2
+EOF
+
+# Spawn window in tmux
+tmux new-window -t "${SESSION}" -n "${WORKER_NAME}" "bash ${RUNNER_SCRIPT}"
+echo "[+] Dispatched worker '${WORKER_NAME}' in tmux window '${SESSION}:${WORKER_NAME}'"
+echo "    To view live: tmux select-window -t ${SESSION}:${WORKER_NAME} (or tmux attach -t ${SESSION})"
+echo "    Waiting for sentinel: ${DONE_SENTINEL}"

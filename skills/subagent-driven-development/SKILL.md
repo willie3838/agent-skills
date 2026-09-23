@@ -243,6 +243,22 @@ any that finished without reporting. A bounded stretch keeps nearly
 all of a long wait's efficiency while guaranteeing a stuck or lost
 child is noticed within minutes, not at the end of the session.
 
+### Dispatch Channels: Tmux Window vs. Native Tool
+
+Subagents can be dispatched through two channels:
+
+1. **Tmux Terminal Worker (Observable & Live - Recommended)**:
+   - When running in terminal environments with `tmux`, spawn workers in dedicated tmux windows:
+     ```bash
+     bash scripts/dispatch-tmux-worker <session-name> <worker-name> <brief-file> <report-file> [agent-cmd]
+     ```
+   - Spawns an isolated tmux window (e.g., `sdd-swarm:task-1-impl`) running the agent CLI on the brief.
+   - You can switch windows and observe the subagent working live (`tmux select-window -t sdd-swarm:task-1-impl`).
+   - The orchestrator waits on the report completion sentinel (`<report-file>.done`).
+
+2. **Native Tool (Background / In-Process)**:
+   - Alternatively, dispatch via the harness subagent tool (`invoke_subagent` in Jetski, `Task` tool in Claude Code).
+
 ### 1. Dispatch the implementer
 
 Record BASE (`git rev-parse HEAD`) before dispatching — the review package
