@@ -1,0 +1,44 @@
+{
+  "skill_name": "explain",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "Can you explain what Kubernetes is?",
+      "expected_output": "A clear, zero-jargon explanation covering why Kubernetes is important, what software deployment looked like before it, and how it transforms operations for someone with zero infrastructure background.",
+      "files": [],
+      "expectations": [
+        "Explicitly breaks down why Kubernetes is important to the world",
+        "Describes what existed before Kubernetes (manual server setup, physical servers, individual virtual machines)",
+        "Details how Kubernetes changes how things operated before (automated self-healing, scaling, container management)",
+        "Uses plain English analogies and avoids unexplained technical jargon (like 'orchestration', 'control plane', 'etcd') without concrete grounding",
+        "Assumes no background knowledge from the reader"
+      ]
+    },
+    {
+      "id": 2,
+      "prompt": "Explain what vector embeddings are in AI.",
+      "expected_output": "An intuitive, plain-language breakdown of vector embeddings that explains their importance, how computers processed text before them, and the breakthrough they enable.",
+      "files": [],
+      "expectations": [
+        "Explains why vector embeddings are critical for modern AI and search",
+        "Contrasts with what existed before (keyword matching, exact word counts, literal search)",
+        "Explains how embeddings change operations by mapping meanings into numeric coordinates or a conceptual map",
+        "Avoids math-heavy jargon or high-dimensional linear algebra terms, using accessible real-world analogies (like a map or grocery store aisles)",
+        "Accessible to someone with zero AI or math background"
+      ]
+    },
+    {
+      "id": 3,
+      "prompt": "What is Git and why do developers use it?",
+      "expected_output": "A relatable explanation of Git version control contrasting it with saving multiple file copies, showing how it changed collaboration.",
+      "files": [],
+      "expectations": [
+        "Explains why Git is essential for software development and teamwork",
+        "Illustrates the world before Git (saving files as project_final_v2.zip, emailing code files, overwriting teammates' work)",
+        "Explains how Git fundamentally changed operations (branching, merging, full historical time-travel)",
+        "Avoids internal Git terminology (DAG, commit hash, tree objects) in favor of clear mental models",
+        "Structured with simple, engaging language for a non-programmer"
+      ]
+    }
+  ]
+}

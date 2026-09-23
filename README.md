@@ -26,6 +26,7 @@ A portable, cross-platform library of curated AI agent skills. This repository a
 | Skill | Description | Key Capabilities |
 | :--- | :--- | :--- |
 | [`skill-creator`](skills/skill-creator/) | Create and benchmark agent skills. | Quantitative test cases (`evals/evals.json`), blind A/B comparator agents, browser eval viewer, and trigger auto-optimization. |
+| [`explain`](skills/explain/) | First-principles, zero-jargon explainer. | Explains why a concept matters, what existed before, and how it transforms operations, using everyday analogies for non-experts. |
 | [`i-have-adhd`](skills/i-have-adhd/) | Cognitive ergonomics & zero fluff. | Lead with immediate action, numbered steps, restate state across turns, cap lists at 5 items, concrete time estimates, zero pleasantries. |
 
 ---
