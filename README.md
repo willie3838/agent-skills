@@ -6,10 +6,27 @@ A portable, cross-platform library of curated AI agent skills. This repository a
 
 ## 📦 Skills Directory
 
+### Core Engineering & TDD Lifecycle (Superpowers)
 | Skill | Description | Key Capabilities |
 | :--- | :--- | :--- |
-| [`skill-creator`](skills/skill-creator/) | Create, test, evaluate, and iteratively optimize agent skills. | Quantitative test cases (`evals/evals.json`), blind A/B comparator agents, browser eval viewer, trigger description auto-tuning. |
-| [`i-have-adhd`](skills/i-have-adhd/) | Format agent output specifically for ADHD cognitive ergonomics and zero executive friction. | Lead with immediate action, numbered steps, restate state across turns, cap lists at 5 items, concrete time estimates, zero conversational filler. |
+| [`brainstorming`](skills/brainstorming/) | Socratic design exploration before code. | Interrogates requirements, explores edge cases, and aligns architecture before touching files. |
+| [`writing-plans`](skills/writing-plans/) | Multi-step task planner. | Transforms specs into granular bite-sized tasks with explicit verification gates and file touchpoints. |
+| [`executing-plans`](skills/executing-plans/) | Inline plan executor. | Executes tasks sequentially in the current session with verification checkpoints and zero stalling. |
+| [`subagent-driven-development`](skills/subagent-driven-development/) | Parallel subagent orchestrator. | Dispatches fresh implementer and reviewer subagents per task with spec compliance & code quality reviews. |
+| [`dispatching-parallel-agents`](skills/dispatching-parallel-agents/) | Multi-agent concurrency. | Spawns parallel agents for independent, non-overlapping tasks without shared state. |
+| [`test-driven-development`](skills/test-driven-development/) | Strict test-first engineering. | Enforces RED-GREEN-REFACTOR cycles; requires failing tests before touching production code. |
+| [`systematic-debugging`](skills/systematic-debugging/) | 4-phase root cause analysis. | Investigate $\rightarrow$ hypothesize $\rightarrow$ isolate $\rightarrow$ verify; eliminates guessing and thrashing. |
+| [`verification-before-completion`](skills/verification-before-completion/) | "Evidence before assertions". | Strictly prevents claiming work is done or fixed without executing test commands and inspecting output. |
+| [`using-git-worktrees`](skills/using-git-worktrees/) | Workspace isolation. | Spawns isolated Git worktrees for feature branches to keep the main working tree clean. |
+| [`finishing-a-development-branch`](skills/finishing-a-development-branch/) | Branch integration checklist. | Guides decisions on PR creation, squashing, rebasing, merging, and worktree teardown. |
+| [`requesting-code-review`](skills/requesting-code-review/) | Pre-PR self-audit. | Review checklist to verify changes against specs and quality guidelines before submission. |
+| [`receiving-code-review`](skills/receiving-code-review/) | Objective feedback evaluator. | Prevents blind sycophantic agreement; verifies reviewer feedback technically before applying. |
+
+### Productivity & Meta Skills
+| Skill | Description | Key Capabilities |
+| :--- | :--- | :--- |
+| [`skill-creator`](skills/skill-creator/) | Create and benchmark agent skills. | Quantitative test cases (`evals/evals.json`), blind A/B comparator agents, browser eval viewer, and trigger auto-optimization. |
+| [`i-have-adhd`](skills/i-have-adhd/) | Cognitive ergonomics & zero fluff. | Lead with immediate action, numbered steps, restate state across turns, cap lists at 5 items, concrete time estimates, zero pleasantries. |
 
 ---
 
@@ -37,7 +54,7 @@ The included `install.sh` script automates installing any or all skills to your 
 ./install.sh --symlink
 
 # Install only specific skills
-./install.sh i-have-adhd
+./install.sh test-driven-development systematic-debugging i-have-adhd
 
 # Install into Google Agents CLI directory (~/.agents/skills/)
 ./install.sh --agents
@@ -52,12 +69,11 @@ The included `install.sh` script automates installing any or all skills to your 
 ### Option B: Manual Installation
 
 #### 1. Google Jetski / Gemini CLI
-Copy or symlink the desired skill into `~/.gemini/config/skills/`:
+Copy or symlink desired skills into `~/.gemini/config/skills/`:
 
 ```bash
 mkdir -p ~/.gemini/config/skills
-cp -r skills/i-have-adhd ~/.gemini/config/skills/
-cp -r skills/skill-creator ~/.gemini/config/skills/
+cp -r skills/* ~/.gemini/config/skills/
 ```
 
 To enable the `/i-have-adhd` custom command in Gemini CLI:
@@ -99,12 +115,7 @@ To add a new skill to this repository:
 
    Instructions for the agent...
    ```
-3. (Optional) Add bundled resources:
-   - `scripts/`: Executable scripts for repetitive or deterministic tasks.
-   - `references/`: Reference documentation loaded on demand.
-   - `assets/`: Templates, schemas, or static files.
-   - `agents/`: Platform-specific configurations (`gemini.toml`, `openai.yaml`).
-4. Commit and push:
+3. Commit and push:
    ```bash
    git add skills/my-new-skill
    git commit -m "feat: add my-new-skill"
@@ -116,4 +127,7 @@ To add a new skill to this repository:
 ## 📄 License
 
 This repository is licensed under the [MIT License](LICENSE).
-Individual skills originate from and reference their respective open-source foundations (Anthropic reference skills, [`ayghri/i-have-adhd`](https://github.com/ayghri/i-have-adhd)).
+Individual skills originate from and reference their respective open-source foundations:
+- Superpowers skills from [Jesse Vincent / `obra/superpowers`](https://github.com/obra/superpowers) (MIT License)
+- ADHD ergonomics from [`ayghri/i-have-adhd`](https://github.com/ayghri/i-have-adhd) (MIT License)
+- Anthropic Reference Skill suite for `skill-creator` (Apache 2.0 / MIT)
