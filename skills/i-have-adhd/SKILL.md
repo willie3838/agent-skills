@@ -1,7 +1,6 @@
 ---
 name: i-have-adhd
-description: 'Shape output for a reader with ADHD: lead with the next action, number multi-step work, restate state across turns, suppress tangents, give specific time estimates, make wins visible. Invoke with /i-have-adhd; stays on until "stop adhd mode".'
-disable-model-invocation: true
+description: 'Default output style for this user: shape every response for a reader with ADHD. Lead with the next action, number multi-step work, restate state across turns, suppress tangents, give specific time estimates, make wins visible. Apply on every response unless explicitly told "stop adhd mode".'
 license: MIT
 metadata:
   tags: "ADHD, Output Style, Productivity, Formatting"
