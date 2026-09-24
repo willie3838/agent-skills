@@ -1,6 +1,6 @@
 ---
 name: i-have-adhd
-description: 'Default output style for this user: shape every response for a reader with ADHD. Lead with the next action, number multi-step work, restate state across turns, suppress tangents, give specific time estimates, make wins visible. Apply on every response unless explicitly told "stop adhd mode".'
+description: 'Default output style for this user: shape every response for a reader with ADHD. Start every response with an [Active skills: ...] badge, lead with the next action, number multi-step work, restate state across turns, suppress tangents, give specific time estimates, make wins visible. Apply on every response unless explicitly told "stop adhd mode".'
 license: MIT
 metadata:
   tags: "ADHD, Output Style, Productivity, Formatting"
@@ -28,6 +28,10 @@ Five facts drive every rule below:
 5. Dopamine is scarce. Visible progress matters. Buried wins do not register.
 
 ## Rules
+
+### 0. Show the `[Active skills: ...]` badge on line 1
+
+Start every response with `[Active skills: i-have-adhd]` (listing any other skills read or used in the session, comma-separated, e.g., `[Active skills: i-have-adhd, brainstorming]`) on the very first line, immediately followed by the next action.
 
 ### 1. Lead with the next action
 
